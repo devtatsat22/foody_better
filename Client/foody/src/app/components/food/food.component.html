@@ -1,0 +1,61 @@
+<div class="container mt-5">
+    <div class="header">
+      <button class="btn btn-danger logout-btn" (click)="logout()">Logout</button>
+  </div>
+
+  <div class="separation">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="glass-panel food-filter">
+                        <h5 class="card-title">Filter Food</h5>
+                        <form (ngSubmit)="applyFilter()">
+                            <div class="form-group">
+                                <label for="foodType">Food Type</label>
+                                <select class="form-control" id="foodType" [(ngModel)]="selectedFoodType" name="foodType">
+                                    <option value="">No Filter</option>
+                                    <option value="veg">Veg</option>
+                                    <option value="non-veg">Non-Veg</option>
+                                    <option value="chinese">Chinese</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Apply Filter</button>
+                        </form>
+                    </div>
+            <div class="glass-panel food-list ">
+                        <h5 class="card-title">Food Items</h5>
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Price</th>
+                                        <th>Add to Cart</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let food of filteredFoodItems">
+                                        <td>{{ food.name }}</td>
+                                        <td>{{ food.food_type }}</td>
+                                        <td>{{ food.price }}</td>
+                                        <td>
+                                            <button class="btn" [ngClass]="{'btn-success': food.inCart, 'btn-primary': !food.inCart}" (click)="toggleCart(food)">
+                                                {{ food.inCart ? 'Remove' : 'Add to Cart' }}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="glass-panel food-total">
+                        <h5 class="card-title">Total Payable Amount</h5>
+                        <p>{{ totalAmount }}</p>
+                        <button class="btn btn-success" (click)="goToPayment()">Proceed to Payment</button>
+                    </div>
+        </div>
+    </div>
+  </div>
+</div>  
